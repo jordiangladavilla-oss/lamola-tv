@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CrossFit La Mola. — Agenda 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#0A0908;font-family:'Poppins',sans-serif}
+
+#progress{position:fixed;top:0;left:0;height:7px;background:#A0C9CB;z-index:200;transition:width linear}
+
+/* ══ LAYOUT ══ */
+#wrapper{display:flex;flex-direction:column;height:100%}
+
+/* ══ TOP BANNER ══ */
+#top-banner{height:100px;background:#0A0908;display:flex;align-items:center;justify-content:space-between;padding:0 4rem;flex-shrink:0;border-bottom:4px solid #A0C9CB;z-index:50}
+.tb-logo{font-family:'Archivo Black',sans-serif;font-size:1.9rem;color:#F9F9F4;letter-spacing:1.5px;text-transform:uppercase}
+.tb-right{font-size:1.5rem;font-weight:600;letter-spacing:6px;text-transform:uppercase;color:rgba(249,249,244,.65)}
+
+/* ══ MAIN AREA ══ */
+#main{flex:1;display:flex;overflow:hidden}
+
+/* ══ SIDEBAR ══ */
+#sidebar{width:20%;background:#141212;overflow-y:scroll;overflow-x:hidden;scrollbar-width:none;border-right:3px solid #A0C9CB;flex-shrink:0}
+#sidebar::-webkit-scrollbar{display:none}
+
+.sb-month{background:#E5DFD3;padding:.5rem 1.2rem;position:sticky;top:0;z-index:10}
+.sb-month span{font-family:'Archivo Black',sans-serif;font-size:1rem;letter-spacing:6px;text-transform:uppercase;color:#141212;line-height:1}
+
+.sb-ev{display:flex;align-items:stretch;border-bottom:1px solid rgba(249,249,244,.06);transition:background .35s;border-left:3px solid transparent}
+.sb-ev.active{border-left:3px solid rgba(122,112,72,.6);background:rgba(122,112,72,.12)}
+
+.sb-date{font-family:'Archivo Black',sans-serif;font-size:1.4rem;color:rgba(249,249,244,.5);padding:.7rem .9rem;min-width:70px;display:flex;align-items:center;justify-content:center;flex-shrink:0;white-space:nowrap;transition:color .35s}
+.sb-ev.active .sb-date{color:#C4A84A}
+
+.sb-info{padding:.7rem .9rem .7rem .5rem;flex:1;display:flex;flex-direction:column;justify-content:center;gap:.2rem;border-left:1px solid rgba(249,249,244,.06)}
+.sb-name{font-size:.85rem;font-weight:500;color:rgba(249,249,244,.55);line-height:1.2;transition:color .35s}
+.sb-sub{font-size:.7rem;font-weight:300;color:rgba(249,249,244,.25);line-height:1.3;transition:color .35s}
+.sb-ev.active .sb-name{color:#F9F9F4}
+.sb-ev.active .sb-sub{color:rgba(249,249,244,.4)}
+
+/* ══ SLIDES AREA ══ */
+#slides-wrap{flex:1;position:relative;overflow:hidden}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;pointer-events:none;transform:translateX(50px) scale(.97);transition:opacity .65s cubic-bezier(.4,0,.2,1),transform .65s cubic-bezier(.4,0,.2,1)}
+.slide.active{opacity:1;pointer-events:auto;transform:translateX(0) scale(1)}
+.slide.exit{opacity:0;transform:translateX(-50px) scale(.97)}
+
+/* ══ EVENT SLIDES (sense banner intern) ══ */
+.s-event{background:#F9F9F4;color:#141212}
+.ev-content{flex:1;display:flex;overflow:hidden}
+.ev-left{width:32%;background:#E5DFD3;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:3rem 3rem 3rem 4rem;flex-shrink:0}
+.ev-num{font-family:'Archivo Black',sans-serif;font-size:clamp(5rem,12vw,11rem);color:#141212;line-height:.85;letter-spacing:-4px;white-space:nowrap}
+.ev-num.rng{font-size:clamp(3rem,5.5vw,5.5rem);line-height:1;letter-spacing:-2px}
+.ev-mes{font-family:'Archivo Black',sans-serif;font-size:clamp(2rem,3.5vw,3.5rem);color:rgba(20,18,18,.55);letter-spacing:-1px;text-transform:uppercase;margin-top:.3rem}
+.ev-pill{display:inline-block;margin-top:2rem;font-size:.85rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;padding:.4rem 1rem}
+.ev-pill.interior{background:rgba(122,112,72,.15);color:#7A7048}
+.ev-pill.exterior{background:rgba(20,18,18,.08);color:rgba(20,18,18,.45)}
+.ev-pill.free{background:#A0C9CB;color:#141212}
+.ev-pill.limited{background:rgba(160,201,203,.2);color:rgba(20,18,18,.55)}
+.ev-right{flex:1;display:flex;flex-direction:column;justify-content:center;padding:3rem 4rem 3rem 3.5rem;overflow:hidden}
+.ev-category{font-size:1rem;font-weight:500;letter-spacing:5px;text-transform:uppercase;color:rgba(20,18,18,.28);margin-bottom:1.3rem;display:flex;align-items:center;gap:.7rem}
+.ev-category::before{content:'';width:22px;height:2px;background:rgba(20,18,18,.18)}
+.ev-title{font-family:'Archivo Black',sans-serif;font-size:clamp(2.8rem,6vw,5.8rem);color:#141212;line-height:.95;letter-spacing:-2px;margin-bottom:2rem}
+.ev-title em{font-style:normal;color:#7A7048}
+.ev-rows{display:flex;flex-direction:column;gap:.75rem}
+.ev-row{display:flex;align-items:baseline;gap:1.2rem;padding-bottom:.75rem;border-bottom:1px solid rgba(20,18,18,.07)}
+.ev-row:last-child{border-bottom:none;padding-bottom:0}
+.ev-row-lbl{font-size:.85rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(20,18,18,.3);min-width:130px;flex-shrink:0}
+.ev-row-val{font-size:1.6rem;font-weight:400;color:#141212;line-height:1.3}
+.ev-row-val em{font-style:normal;color:#7A7048;font-weight:600}
+.ev-desc{margin-top:1.5rem;font-size:1.15rem;font-weight:300;color:rgba(20,18,18,.5);line-height:1.85;border-top:1px solid rgba(20,18,18,.07);padding-top:1.5rem}
+
+/* ══ SUMMER FEST ══ */
+.s-save{background:#E5DFD3;color:#141212}
+.save-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem}
+.save-pre{font-size:1rem;font-weight:500;letter-spacing:9px;text-transform:uppercase;color:rgba(20,18,18,.4);margin-bottom:1rem}
+.save-date{font-size:1.9rem;font-weight:600;color:rgba(20,18,18,.45);letter-spacing:3px;margin-bottom:.6rem}
+.save-title{font-family:'Archivo Black',sans-serif;font-size:clamp(4rem,9vw,9rem);color:#A0C9CB;line-height:.88;letter-spacing:-3px;margin-bottom:1.5rem}
+.save-sub{font-size:1.5rem;font-weight:300;color:rgba(20,18,18,.6);line-height:1.9;max-width:750px}
+.save-tag{display:inline-block;border:3px solid #A0C9CB;color:#A0C9CB;font-size:1rem;font-weight:700;letter-spacing:6px;text-transform:uppercase;padding:.65rem 2.5rem;margin-top:2rem}
+
+/* ══ DOTS ══ */
+#nav-dots{position:fixed;bottom:1.5rem;right:2rem;display:flex;gap:.5rem;z-index:100;background:rgba(10,9,8,.4);padding:.5rem 1rem;border-radius:20px;backdrop-filter:blur(6px)}
+.ndot{width:8px;height:8px;border-radius:50%;background:rgba(249,249,244,.3);transition:all .3s}
+.ndot.active{background:#A0C9CB;width:28px;border-radius:4px}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<div id="wrapper">
+
+  <!-- ══ TOP BANNER ══ -->
+  <div id="top-banner">
+    <span class="tb-logo">CROSSFIT LA MOLA.</span>
+    <span class="tb-right">Agenda · Temporada 2026</span>
+  </div>
+
+  <div id="main">
+
+    <!-- ══ SIDEBAR ══ -->
+    <div id="sidebar">
+
+      <div class="sb-month"><span>Abril</span></div>
+      <div class="sb-ev" id="sb-ev-0">
+        <div class="sb-date">11</div>
+        <div class="sb-info"><div class="sb-name">Seminari Gymnastics</div><div class="sb-sub">Chiara Sudati · 09:00–13:30h · 50€</div></div>
+      </div>
+      <div class="sb-ev" id="sb-ev-1">
+        <div class="sb-date">18</div>
+        <div class="sb-info"><div class="sb-name">Masterclass Iniciació CrossFit</div><div class="sb-sub">CrossFit La Mola. · 11:45–13:15h · Gratuïta</div></div>
+      </div>
+      <div class="sb-ev" id="sb-ev-2">
+        <div class="sb-date">26</div>
+        <div class="sb-info"><div class="sb-name">Running Club @ La Barceloneta</div><div class="sb-sub">Barcelona · 10:00h · Run + Brunch</div></div>
+      </div>
+
+      <div class="sb-month"><span>Maig</span></div>
+      <div class="sb-ev" id="sb-ev-3">
+        <div class="sb-date">23–24</div>
+        <div class="sb-info"><div class="sb-name">Mountain Club. Pedraforca</div><div class="sb-sub">Camping Wecamp · Cim 2.506m</div></div>
+      </div>
+      <div class="sb-ev" id="sb-ev-4">
+        <div class="sb-date">30</div>
+        <div class="sb-info"><div class="sb-name">Beach WOD. La Mola &amp; One Mile</div><div class="sb-sub">Platja · 09:00–16:00h</div></div>
+      </div>
+
+      <div class="sb-month"><span>Juny</span></div>
+      <div class="sb-ev" id="sb-ev-5">
+        <div class="sb-date">5–7</div>
+        <div class="sb-info"><div class="sb-name">FCL Games</div><div class="sb-sub">CrossFit Lynx · Individual</div></div>
+      </div>
+      <div class="sb-ev" id="sb-ev-6">
+        <div class="sb-date">13–14</div>
+        <div class="sb-info"><div class="sb-name">BÚFALO GAMES</div><div class="sb-sub">RANXO, Granollers · Parelles</div></div>
+      </div>
+      <div class="sb-ev" id="sb-ev-7">
+        <div class="sb-date">19–21</div>
+        <div class="sb-info"><div class="sb-name">Consuegra Throwdown</div><div class="sb-sub">Toledo · Parelles</div></div>
+      </div>
+      <div class="sb-ev" id="sb-ev-8">
+        <div class="sb-date">27–28</div>
+        <div class="sb-info"><div class="sb-name">Daurada Games · Cambrils</div><div class="sb-sub">Costa Daurada · Individual i Equips</div></div>
+      </div>
+
+      <div class="sb-month"><span>Juliol</span></div>
+      <div class="sb-ev" id="sb-ev-9">
+        <div class="sb-date">4</div>
+        <div class="sb-info"><div class="sb-name">★ La Mola. Summer Fest</div><div class="sb-sub">CrossFit La Mola. · 09:00–16:00h</div></div>
+      </div>
+
+      <div class="sb-month"><span>Setembre</span></div>
+      <div class="sb-ev" id="sb-ev-10">
+        <div class="sb-date">11–13</div>
+        <div class="sb-info"><div class="sb-name">Wodcelona · Barcelona</div><div class="sb-sub">Barcelona · Individual i Equips</div></div>
+      </div>
+      <div style="height:3rem"></div>
+    </div>
+
+    <!-- ══ SLIDES ══ -->
+    <div id="slides-wrap">
+      <div id="nav-dots"></div>
+
+      <!-- 0: Abr 11 -->
+      <div class="slide s-event">
+        <div class="ev-content">
+          <div class="ev-left"><div class="ev-num">11</div><div class="ev-mes">Abr</div><div class="ev-pill interior">Seminari</div></div>
+          <div class="ev-right">
+            <div class="ev-category">Especialitat · Gymnastics</div>
+            <div class="ev-title">Gymnastics amb<br><em>Chiara Sudati</em></div>
+            <div class="ev-rows">
+              <div class="ev-row"><div class="ev-row-lbl">On</div><div class="ev-row-val">CrossFit La Mola.</div></div>
+              <div class="ev-row"><div class="ev-row-lbl">Horari</div><div class="ev-row-val">09:00 – 13:30h</div></div>
+              <div class="ev-row"><div class="ev-row-lbl">Preu</div><div class="ev-row-val"><em>50 € / persona</em></div></div>
+              <div class="ev-row"><div class="ev-row-lbl">Contingut</div><div class="ev-row-val">Bar Muscle-ups · HSPU · Handstand Walk</div></div>
+            </div>
+            <div class="ev-desc">Aprèn les habilitats de gimnàstica més demandades amb una atleta d'elit internacional. Sessions pràctiques i progressives per a tots els nivells.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1: Abr 18 -->
+      <div class="slide s-event">
+        <div class="ev-content">
+          <div class="ev-left"><div class="ev-num">18</div><div class="ev-mes">Abr</div><div class="ev-pill free">Gratuïta</div></div>
+          <div class="ev-right">
+            <div class="ev-category">Masterclass · Iniciació</div>
+            <div class="ev-title">Masterclass<br><em>Iniciació</em> CrossFit</div>
+            <div class="ev-rows">
+              <div class="ev-row"><div class="ev-row-lbl">On</div><div class="ev-row-val">CrossFit La Mola.</div></div>
+              <div class="ev-row"><div class="ev-row-lbl">Horari</div><div class="ev-row-val">11:45 – 13:15h</div></div>
+              <div class="ev-row"><div class="ev-row-lbl">Preu</div><div class="ev-row-val"><em>Gratuïta · Accés lliure</em></div></div>
+              <div class="ev-row"><div class="ev-row-lbl">Contingut</div><div class="ev-row-val">Double Unders · Moviments bàsics</div></div>
+            </div>
+            <div class="ev-desc">Sessió d'introducció al CrossFit per a nous atletes. Cap experiència prèvia necessària. Porta un amic i descobriu junts el que fa especial La Mola.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2: Abr 26 -->
+      <div class="slide s-event">
+        <div class="ev-content">
+          <div class="ev-left"><div class="ev-num">26</div><div class="ev-mes">Abr</div><div class="ev-pill interior">Running Club</div></div>
+          <div class="ev-right">
+            <div class="ev-category">Activitat · Comunitat</div>
+            <div class="ev-title">La Mola.<br>Running Club<br><em>@ La Barceloneta</em></div>
+            <div class="ev-rows">
+              <div class="ev-row"><div class="ev-row-lbl">On</div><div class="ev-row-val">La Barceloneta, Barcelona</div></div>
+              <div class="ev-row"><div class="ev-row-lbl">Inici</div><div class="ev-row-val">10:00h</div></div>
+              <div class="ev-row"><div class="ev-row-lbl">Nivell</div><div class="ev-row-val">Tots els nivells benvinguts</div></div>
+              <div class="ev-row"><div class="ev-row-lbl">Format</div><div class="ev-row-val">Run grupal + Brunch</div></div>
+            </div>
+            <div class="ev-desc">Sortida de running per la Barceloneta seguida d'un esmorzar en format brunch. Esport, mar i comunitat. La millor combinació.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3: Mai 23-24 -->
+      <div class="slide s-event">
+        <div class="ev-content">
+          <div class="ev-left"><div class="ev-num rng">23–24</div><div class="ev-mes">Mai</div><div class="ev-pill limited">Places limitades</div></div>
+          <div class="ev-right">
+            <div class="ev-category">Mountain Club · Expedició</div>
+            <div class="ev-title">La Mola.<br>Mountain Club.<br><em>Pedraforca</em></div>
+            <div class="ev-rows">
+              <div class="ev-row"><div class="ev-row-lbl">On</div><div class="ev-row-val">Camping Wecamp + Pedraforca</div></div>
+              <div class="ev-row"><div class="ev-row-lbl">Durada</div><div class="ev-row-val">Cap de setmana complet</div></div>
+              <div class="ev-row"><div class="ev-row-lbl">Cim</div><div class="ev-row-val"><em>2.506 m</em> d'altitud</div></div>
+            </div>
+            <div class="ev-desc">L'expedició de l'any. Dos dies a la muntanya, campament al peu del Pedraforca i l'ascensió fins al cim. Naturalesa, comunitat i esforç compartit.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4: Mai 30 -->
+      <div class="slide s-event">
+        <div class="ev-content">
+          <div class="ev-left"><div class="ev-num">30</div><div class="ev-mes">Mai</div><div class="ev-pill interior">Beach WOD</div></div>
+          <div class="ev-right">
+            <div class="ev-category">Activitat · Comunitat</div>
+            <div class="ev-title">Beach WOD.<br>La Mola. <em>&amp;</em> One Mile</div>
+            <div class="ev-rows">
+              <div class="ev-row"><div class="ev-row-lbl">On</div><div class="ev-row-val">Platja · a confirmar</div></div>
+              <div class="ev-row"><div class="ev-row-lbl">Horari</div><div class="ev-row-val">09:00 – 16:00h</div></div>
+              <div class="ev-row"><div class="ev-row-lbl">Format</div><div class="ev-row-val">WOD + One Mile + activitats aquàtiques</div></div>
+            </div>
+            <div class="ev-desc">Jornada completa a la platja en col·laboració amb One Mile. Sol, sorra, mar i la millor comunitat.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5: Jun 5-7 -->
+      <div class="slide s-event">
+        <div class="ev-content">
+          <div class="ev-left"><div class="ev-num rng">5–7</div><div class="ev-mes">Jun</div><div class="ev-pill exterior">Competició ext.</div></div>
+          <div class="ev-right">
+            <div class="ev-category">Competició · FCL Games</div>
+            <div class="ev-title"><em>FCL</em> Games</div>
+            <div class="ev-rows">
+              <div class="ev-row"><div class="ev-row-lbl">On</div><div class="ev-row-val">CrossFit Lynx</div></div>
+              <div class="ev-row"><div class="ev-row-lbl">Dates</div><div class="ev-row-val">5, 6 i 7 de juny</div></div>
+              <div class="ev-row"><div class="ev-row-lbl">Categoria</div><div class="ev-row-val">Individual</div></div>
+            </div>
+            <div class="ev-desc">Tres dies de competició al més alt nivell regional. Inscripcions via Aimharder.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6: Jun 13-14 -->
+      <div class="slide s-event">
+        <div class="ev-content">
+          <div class="ev-left"><div class="ev-num rng">13–14</div><div class="ev-mes">Jun</div><div class="ev-pill exterior">Competició ext.</div></div>
+          <div class="ev-right">
+            <div class="ev-category">Competició · Parelles</div>
+            <div class="ev-title"><em>BÚFALO</em> GAMES<br>Granollers</div>
+            <div class="ev-rows">
+              <div class="ev-row"><div class="ev-row-lbl">On</div><div class="ev-row-val">RANXO, Granollers</div></div>
+              <div class="ev-row"><div class="ev-row-lbl">Dates</div><div class="ev-row-val">13 i 14 de juny</div></div>
+              <div class="ev-row"><div class="ev-row-lbl">Categoria</div><div class="ev-row-val">Parelles</div></div>
+            </div>
+            <div class="ev-desc">Una de les competicions per parelles amb més ambient del calendari. Dos dies al RANXO de Granollers on el treball en equip és la clau.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7: Jun 19-21 -->
+      <div class="slide s-event">
+        <div class="ev-content">
+          <div class="ev-left"><div class="ev-num rng">19–21</div><div class="ev-mes">Jun</div><div class="ev-pill exterior">Competició ext.</div></div>
+          <div class="ev-right">
+            <div class="ev-category">Competició · Parelles</div>
+            <div class="ev-title"><em>Consuegra</em><br>Throwdown</div>
+            <div class="ev-rows">
+              <div class="ev-row"><div class="ev-row-lbl">On</div><div class="ev-row-val">Toledo, Castella-La Manxa</div></div>
+              <div class="ev-row"><div class="ev-row-lbl">Dates</div><div class="ev-row-val">19, 20 i 21 de juny</div></div>
+              <div class="ev-row"><div class="ev-row-lbl">Categoria</div><div class="ev-row-val">Parelles</div></div>
+            </div>
+            <div class="ev-desc">Competició de referència nacional. Tres dies de CrossFit per parelles a Toledo. Esport d'alt nivell i experiència inoblidable fora de casa.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8: Jun 27-28 -->
+      <div class="slide s-event">
+        <div class="ev-content">
+          <div class="ev-left"><div class="ev-num rng">27–28</div><div class="ev-mes">Jun</div><div class="ev-pill exterior">Competició ext.</div></div>
+          <div class="ev-right">
+            <div class="ev-category">Competició · Individual i Equips</div>
+            <div class="ev-title"><em>Daurada</em> Games<br>Cambrils</div>
+            <div class="ev-rows">
+              <div class="ev-row"><div class="ev-row-lbl">On</div><div class="ev-row-val">Cambrils, Costa Daurada</div></div>
+              <div class="ev-row"><div class="ev-row-lbl">Dates</div><div class="ev-row-val">27 i 28 de juny</div></div>
+              <div class="ev-row"><div class="ev-row-lbl">Categoria</div><div class="ev-row-val">Individual i Equips</div></div>
+            </div>
+            <div class="ev-desc">Final de temporada a primera línia de mar. Dues categories disponibles: Individual i Equips.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9: Summer Fest -->
+      <div class="slide s-save">
+        <div class="save-body">
+          <div class="save-pre">Competició interna · CrossFit La Mola.</div>
+          <div class="save-date">4 de juliol de 2026</div>
+          <div class="save-title">La Mola.<br>Summer Fest</div>
+          <div class="save-sub">La festa de l'estiu ha tornat.<br>WOD, coctels, música i welcome pack per a tots els participants.<br>09:00 – 16:00h · CrossFit La Mola.</div>
+          <div class="save-tag">★ SAVE THE DATE ★</div>
+        </div>
+      </div>
+
+      <!-- 10: Set 11-13 -->
+      <div class="slide s-event">
+        <div class="ev-content">
+          <div class="ev-left"><div class="ev-num rng">11–13</div><div class="ev-mes">Set</div><div class="ev-pill exterior">Competició ext.</div></div>
+          <div class="ev-right">
+            <div class="ev-category">Competició · Internacional</div>
+            <div class="ev-title"><em>Wodcelona</em><br>Barcelona</div>
+            <div class="ev-rows">
+              <div class="ev-row"><div class="ev-row-lbl">On</div><div class="ev-row-val">Barcelona</div></div>
+              <div class="ev-row"><div class="ev-row-lbl">Dates</div><div class="ev-row-val">11, 12 i 13 de setembre</div></div>
+              <div class="ev-row"><div class="ev-row-lbl">Categoria</div><div class="ev-row-val">Individual i Equips</div></div>
+            </div>
+            <div class="ev-desc">La gran cita final de temporada. Wodcelona és la competició internacional de referència a Barcelona.</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /slides-wrap -->
+  </div><!-- /main -->
+</div><!-- /wrapper -->
+
+<script>
+var sbMap = [
+  'sb-ev-0','sb-ev-1','sb-ev-2',
+  'sb-ev-3','sb-ev-4',
+  'sb-ev-5','sb-ev-6','sb-ev-7','sb-ev-8',
+  'sb-ev-9',
+  'sb-ev-10'
+];
+
+var slides = document.querySelectorAll('.slide');
+var N = slides.length;
+var cur = 0;
+var dur = [15,15,15, 15,15, 15,15,15,15, 19, 15];
+var sidebar = document.getElementById('sidebar');
+var dotsC = document.getElementById('nav-dots');
+var prog = document.getElementById('progress');
+var timer;
+
+slides.forEach(function(_,i){
+  var d = document.createElement('div');
+  d.className = 'ndot'+(i===0?' active':'');
+  dotsC.appendChild(d);
+});
+
+function updateSidebar(n){
+  document.querySelectorAll('.sb-ev.active').forEach(function(el){el.classList.remove('active');});
+  var target = document.getElementById(sbMap[n]);
+  if(target){
+    target.classList.add('active');
+    target.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+}
+
+function goTo(n){
+  var prev=cur, next=((n%N)+N)%N;
+  if(prev===next)return;
+  slides[prev].classList.add('exit');
+  slides[prev].classList.remove('active');
+  document.querySelectorAll('.ndot')[prev].classList.remove('active');
+  var old=slides[prev];
+  setTimeout(function(){old.classList.remove('exit');},700);
+  cur=next;
+  slides[cur].classList.add('active');
+  document.querySelectorAll('.ndot')[cur].classList.add('active');
+  updateSidebar(cur);
+  startTimer();
+}
+
+function startTimer(){
+  clearTimeout(timer);
+  var d=(dur[cur]||15)*1000;
+  prog.style.transition='none';prog.style.width='0%';
+  setTimeout(function(){prog.style.transition='width '+d+'ms linear';prog.style.width='100%';},60);
+  timer=setTimeout(function(){goTo(cur+1);},d);
+}
+
+slides[0].classList.add('active');
+document.querySelectorAll('.ndot')[0].classList.add('active');
+updateSidebar(0);
+startTimer();
+
+document.addEventListener('keydown',function(e){
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();goTo(cur+1);}
+  if(e.key==='ArrowLeft'){e.preventDefault();goTo(cur-1);}
+});
+var tx=0;
+document.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});
+document.addEventListener('touchend',function(e){
+  var dx=e.changedTouches[0].clientX-tx;
+  if(Math.abs(dx)>60){dx<0?goTo(cur+1):goTo(cur-1);}
+});
+</script>
+</body>
+</html>
