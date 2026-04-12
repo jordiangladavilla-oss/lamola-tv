@@ -2,15 +2,13 @@
 <html lang="ca">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=0.5">
 <title>CrossFit La Mola. — Agenda 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html{width:100%;height:100%;overflow:hidden}
-body{width:100%;height:100%;overflow:hidden;background:#0A0908;font-family:'Poppins',sans-serif}
-#scale-wrap{transform:scale(0.625);transform-origin:top left;width:160%;height:160%;position:fixed;top:0;left:0;overflow:hidden}
+html,body{width:100%;height:100%;overflow:hidden;background:#0A0908;font-family:'Poppins',sans-serif}
 
 #progress{position:fixed;top:0;left:0;height:7px;background:#A0C9CB;z-index:200;transition:width linear}
 
@@ -79,7 +77,7 @@ body{width:100%;height:100%;overflow:hidden;background:#0A0908;font-family:'Popp
 .s-save{background:#E5DFD3;color:#141212}
 .save-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem}
 .save-pre{font-size:1rem;font-weight:500;letter-spacing:9px;text-transform:uppercase;color:rgba(20,18,18,.4);margin-bottom:1rem}
-.save-date{font-size:3rem;font-weight:600;color:rgba(20,18,18,.45);letter-spacing:3px;margin-bottom:.8rem}
+.save-date{font-size:1.9rem;font-weight:600;color:rgba(20,18,18,.45);letter-spacing:3px;margin-bottom:.6rem}
 .save-title{font-family:'Archivo Black',sans-serif;font-size:clamp(4rem,9vw,9rem);color:#A0C9CB;line-height:.88;letter-spacing:-3px;margin-bottom:1.5rem}
 .save-sub{font-size:1.5rem;font-weight:300;color:rgba(20,18,18,.6);line-height:1.9;max-width:750px}
 .save-tag{display:inline-block;border:3px solid #A0C9CB;color:#A0C9CB;font-size:1rem;font-weight:700;letter-spacing:6px;text-transform:uppercase;padding:.65rem 2.5rem;margin-top:2rem}
@@ -91,7 +89,6 @@ body{width:100%;height:100%;overflow:hidden;background:#0A0908;font-family:'Popp
 </style>
 </head>
 <body>
-<div id="scale-wrap">
 <div id="progress"></div>
 <div id="wrapper">
 
@@ -108,54 +105,50 @@ body{width:100%;height:100%;overflow:hidden;background:#0A0908;font-family:'Popp
 
       <div class="sb-month"><span>Abril</span></div>
       <div class="sb-ev" id="sb-ev-0">
-        <div class="sb-date">11</div>
-        <div class="sb-info"><div class="sb-name">Seminari Gymnastics</div><div class="sb-sub">Chiara Sudati · 09:00–13:30h · 50€</div></div>
-      </div>
-      <div class="sb-ev" id="sb-ev-1">
         <div class="sb-date">18</div>
         <div class="sb-info"><div class="sb-name">Masterclass Iniciació CrossFit</div><div class="sb-sub">CrossFit La Mola. · 11:45–13:15h · Gratuïta</div></div>
       </div>
-      <div class="sb-ev" id="sb-ev-2">
+      <div class="sb-ev" id="sb-ev-1">
         <div class="sb-date">19</div>
         <div class="sb-info"><div class="sb-name">Running Club @ La Barceloneta</div><div class="sb-sub">Barcelona · 10:00h · Run + Brunch</div></div>
       </div>
 
       <div class="sb-month"><span>Maig</span></div>
-      <div class="sb-ev" id="sb-ev-3">
+      <div class="sb-ev" id="sb-ev-2">
         <div class="sb-date">23–24</div>
         <div class="sb-info"><div class="sb-name">Mountain Club. Pedraforca</div><div class="sb-sub">Camping Wecamp · Cim 2.506m</div></div>
       </div>
-      <div class="sb-ev" id="sb-ev-4">
+      <div class="sb-ev" id="sb-ev-3">
         <div class="sb-date">30</div>
         <div class="sb-info"><div class="sb-name">Beach WOD. La Mola &amp; One Mile</div><div class="sb-sub">Platja · 09:00–16:00h</div></div>
       </div>
 
       <div class="sb-month"><span>Juny</span></div>
-      <div class="sb-ev" id="sb-ev-5">
+      <div class="sb-ev" id="sb-ev-4">
         <div class="sb-date">5–7</div>
         <div class="sb-info"><div class="sb-name">FCL Games</div><div class="sb-sub">CrossFit Lynx · Individual</div></div>
       </div>
-      <div class="sb-ev" id="sb-ev-6">
+      <div class="sb-ev" id="sb-ev-5">
         <div class="sb-date">13–14</div>
         <div class="sb-info"><div class="sb-name">BÚFALO GAMES</div><div class="sb-sub">RANXO, Granollers · Parelles</div></div>
       </div>
-      <div class="sb-ev" id="sb-ev-7">
+      <div class="sb-ev" id="sb-ev-6">
         <div class="sb-date">19–21</div>
         <div class="sb-info"><div class="sb-name">Consuegra Throwdown</div><div class="sb-sub">Toledo · Parelles</div></div>
       </div>
-      <div class="sb-ev" id="sb-ev-8">
+      <div class="sb-ev" id="sb-ev-7">
         <div class="sb-date">27–28</div>
         <div class="sb-info"><div class="sb-name">Daurada Games · Cambrils</div><div class="sb-sub">Costa Daurada · Individual i Equips</div></div>
       </div>
 
       <div class="sb-month"><span>Juliol</span></div>
-      <div class="sb-ev" id="sb-ev-9">
+      <div class="sb-ev" id="sb-ev-8">
         <div class="sb-date">4</div>
         <div class="sb-info"><div class="sb-name">★ La Mola. Summer Fest</div><div class="sb-sub">CrossFit La Mola. · 09:00–16:00h</div></div>
       </div>
 
       <div class="sb-month"><span>Setembre</span></div>
-      <div class="sb-ev" id="sb-ev-10">
+      <div class="sb-ev" id="sb-ev-9">
         <div class="sb-date">11–13</div>
         <div class="sb-info"><div class="sb-name">Wodcelona · Barcelona</div><div class="sb-sub">Barcelona · Individual i Equips</div></div>
       </div>
@@ -166,25 +159,7 @@ body{width:100%;height:100%;overflow:hidden;background:#0A0908;font-family:'Popp
     <div id="slides-wrap">
       <div id="nav-dots"></div>
 
-      <!-- 0: Abr 11 -->
-      <div class="slide s-event">
-        <div class="ev-content">
-          <div class="ev-left"><div class="ev-num">11</div><div class="ev-mes">Abr</div><div class="ev-pill interior">Seminari</div></div>
-          <div class="ev-right">
-            <div class="ev-category">Especialitat · Gymnastics</div>
-            <div class="ev-title">Gymnastics amb<br><em>Chiara Sudati</em></div>
-            <div class="ev-rows">
-              <div class="ev-row"><div class="ev-row-lbl">On</div><div class="ev-row-val">CrossFit La Mola.</div></div>
-              <div class="ev-row"><div class="ev-row-lbl">Horari</div><div class="ev-row-val">09:00 – 13:30h</div></div>
-              <div class="ev-row"><div class="ev-row-lbl">Preu</div><div class="ev-row-val"><em>50 € / persona</em></div></div>
-              <div class="ev-row"><div class="ev-row-lbl">Contingut</div><div class="ev-row-val">Bar Muscle-ups · HSPU · Handstand Walk</div></div>
-            </div>
-            <div class="ev-desc">Aprèn les habilitats de gimnàstica més demandades amb una atleta d'elit internacional. Sessions pràctiques i progressives per a tots els nivells.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 1: Abr 18 -->
+      <!-- 0: Abr 18 -->
       <div class="slide s-event">
         <div class="ev-content">
           <div class="ev-left"><div class="ev-num">18</div><div class="ev-mes">Abr</div><div class="ev-pill free">Gratuïta</div></div>
@@ -202,7 +177,7 @@ body{width:100%;height:100%;overflow:hidden;background:#0A0908;font-family:'Popp
         </div>
       </div>
 
-      <!-- 2: Abr 19 -->
+      <!-- 1: Abr 19 -->
       <div class="slide s-event">
         <div class="ev-content">
           <div class="ev-left"><div class="ev-num">19</div><div class="ev-mes">Abr</div><div class="ev-pill interior">Running Club</div></div>
@@ -220,7 +195,7 @@ body{width:100%;height:100%;overflow:hidden;background:#0A0908;font-family:'Popp
         </div>
       </div>
 
-      <!-- 3: Mai 23-24 -->
+      <!-- 2: Mai 23-24 -->
       <div class="slide s-event">
         <div class="ev-content">
           <div class="ev-left"><div class="ev-num rng">23–24</div><div class="ev-mes">Mai</div><div class="ev-pill limited">Places limitades</div></div>
@@ -237,7 +212,7 @@ body{width:100%;height:100%;overflow:hidden;background:#0A0908;font-family:'Popp
         </div>
       </div>
 
-      <!-- 4: Mai 30 -->
+      <!-- 3: Mai 30 -->
       <div class="slide s-event">
         <div class="ev-content">
           <div class="ev-left"><div class="ev-num">30</div><div class="ev-mes">Mai</div><div class="ev-pill interior">Beach WOD</div></div>
@@ -254,7 +229,7 @@ body{width:100%;height:100%;overflow:hidden;background:#0A0908;font-family:'Popp
         </div>
       </div>
 
-      <!-- 5: Jun 5-7 -->
+      <!-- 4: Jun 5-7 -->
       <div class="slide s-event">
         <div class="ev-content">
           <div class="ev-left"><div class="ev-num rng">5–7</div><div class="ev-mes">Jun</div><div class="ev-pill exterior">Competició ext.</div></div>
@@ -271,7 +246,7 @@ body{width:100%;height:100%;overflow:hidden;background:#0A0908;font-family:'Popp
         </div>
       </div>
 
-      <!-- 6: Jun 13-14 -->
+      <!-- 5: Jun 13-14 -->
       <div class="slide s-event">
         <div class="ev-content">
           <div class="ev-left"><div class="ev-num rng">13–14</div><div class="ev-mes">Jun</div><div class="ev-pill exterior">Competició ext.</div></div>
@@ -288,7 +263,7 @@ body{width:100%;height:100%;overflow:hidden;background:#0A0908;font-family:'Popp
         </div>
       </div>
 
-      <!-- 7: Jun 19-21 -->
+      <!-- 6: Jun 19-21 -->
       <div class="slide s-event">
         <div class="ev-content">
           <div class="ev-left"><div class="ev-num rng">19–21</div><div class="ev-mes">Jun</div><div class="ev-pill exterior">Competició ext.</div></div>
@@ -305,7 +280,7 @@ body{width:100%;height:100%;overflow:hidden;background:#0A0908;font-family:'Popp
         </div>
       </div>
 
-      <!-- 8: Jun 27-28 -->
+      <!-- 7: Jun 27-28 -->
       <div class="slide s-event">
         <div class="ev-content">
           <div class="ev-left"><div class="ev-num rng">27–28</div><div class="ev-mes">Jun</div><div class="ev-pill exterior">Competició ext.</div></div>
@@ -322,7 +297,7 @@ body{width:100%;height:100%;overflow:hidden;background:#0A0908;font-family:'Popp
         </div>
       </div>
 
-      <!-- 9: Summer Fest -->
+      <!-- 8: Summer Fest -->
       <div class="slide s-save">
         <div class="save-body">
           <div class="save-pre">Competició interna · CrossFit La Mola.</div>
@@ -333,7 +308,7 @@ body{width:100%;height:100%;overflow:hidden;background:#0A0908;font-family:'Popp
         </div>
       </div>
 
-      <!-- 10: Set 11-13 -->
+      <!-- 9: Set 11-13 -->
       <div class="slide s-event">
         <div class="ev-content">
           <div class="ev-left"><div class="ev-num rng">11–13</div><div class="ev-mes">Set</div><div class="ev-pill exterior">Competició ext.</div></div>
@@ -354,20 +329,19 @@ body{width:100%;height:100%;overflow:hidden;background:#0A0908;font-family:'Popp
   </div><!-- /main -->
 </div><!-- /wrapper -->
 
-</div><!-- /scale-wrap -->
 <script>
 var sbMap = [
-  'sb-ev-0','sb-ev-1','sb-ev-2',
-  'sb-ev-3','sb-ev-4',
-  'sb-ev-5','sb-ev-6','sb-ev-7','sb-ev-8',
-  'sb-ev-9',
-  'sb-ev-10'
+  'sb-ev-0','sb-ev-1',
+  'sb-ev-2','sb-ev-3',
+  'sb-ev-4','sb-ev-5','sb-ev-6','sb-ev-7',
+  'sb-ev-8',
+  'sb-ev-9'
 ];
 
 var slides = document.querySelectorAll('.slide');
 var N = slides.length;
 var cur = 0;
-var dur = [15,15,15, 15,15, 15,15,15,15, 19, 15];
+var dur = [15,15, 15,15, 15,15,15,15, 19, 15];
 var sidebar = document.getElementById('sidebar');
 var dotsC = document.getElementById('nav-dots');
 var prog = document.getElementById('progress');
